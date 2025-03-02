@@ -1,6 +1,8 @@
 import prettier from 'eslint-plugin-prettier';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import pluginQuery from '@tanstack/eslint-plugin-query';
+import pluginRouter from '@tanstack/eslint-plugin-router';
 import pluginReact from 'eslint-plugin-react';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
@@ -28,6 +30,8 @@ const eslintConfig = [
       '@typescript-eslint': tseslint,
       react: pluginReact,
       prettier: prettier,
+      '@tanstack/query': pluginQuery,
+      '@tanstack/router': pluginRouter,
     },
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     rules: {
