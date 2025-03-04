@@ -1,77 +1,60 @@
-import prettier from 'eslint-plugin-prettier';
-import tseslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
-import pluginQuery from '@tanstack/eslint-plugin-query';
-import pluginRouter from '@tanstack/eslint-plugin-router';
-import pluginReact from 'eslint-plugin-react';
-import { fileURLToPath } from 'node:url';
-import { dirname } from 'node:path';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
+import react from "@eslint-react/eslint-plugin";
+import js from "@eslint/js";
+import pluginQuery from "@tanstack/eslint-plugin-query";
+import pluginRouter from "@tanstack/eslint-plugin-router";
+import eslintConfigPrettier from "eslint-config-prettier";
+import reactCompiler from "eslint-plugin-react-compiler";
+import reactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compact = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
-const eslintConfig = [
-  ...compact.extends(
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-  ),
+// TODO: clean up for better composability
+export default tseslint.config(
   {
-    plugins: {
-      '@typescript-eslint': tseslint,
-      react: pluginReact,
-      prettier: prettier,
-      '@tanstack/query': pluginQuery,
-      '@tanstack/router': pluginRouter,
-    },
-    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    rules: {
-      'prettier/prettier': 'error',
-      'no-console': ['error'],
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-        },
-      ],
-      'react/react-in-jsx-scope': 'off',
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-    languageOptions: {
-      parser: tsParser,
-      ecmaVersion: 2022,
-      sourceType: 'module',
-      parserOptions: {
-        project: ['./tsconfig.json'],
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    ignores: [
-      'vite.config.js',
-      'eslint.config.js',
-      'tailwind.config.js',
-      '.husky/**',
-      'node_modules/**',
-      'dist/**',
-      'build/**',
+    ignores: ["dist", ".vinxi", ".wrangler", ".vercel", ".netlify", ".output", "build/"],
+  },
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      eslintConfigPrettier,
+      ...pluginQuery.configs["flat/recommended"],
+      ...pluginRouter.configs["flat/recommended"],
     ],
   },
-];
-
-/** @type {import('eslint').Linter.Config[]} */
-export default eslintConfig;
+  {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
+    plugins: {
+      "react-hooks": reactHooks,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+    },
+  },
+  reactCompiler.configs.recommended,
+  {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+        project: "./tsconfig.json",
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    ...react.configs["recommended-type-checked"],
+  },
+  {
+    rules: {
+      // You can override any rules here
+      // "@eslint-react/prefer-read-only-props": "off",
+      // "@eslint-react/no-forward-ref": "off",
+      // "@eslint-react/no-context-provider": "off",
+    },
+  },
+);
