@@ -1,9 +1,12 @@
-import { Link, createFileRoute, useRouter } from "@tanstack/react-router";
-import ThemeToggle from "~/lib/components/ThemeToggle";
-import { Button } from "~/lib/components/ui/button";
-import authClient from "~/lib/utils/auth-client";
+import { Link, createFileRoute, useRouter } from '@tanstack/react-router';
+import ThemeToggle from '~/lib/components/ThemeToggle';
+import { Button } from '~/lib/components/ui/button';
+import authClient from '~/lib/utils/auth-client';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { api } from '../../convex/_generated/api';
+import { convexQuery } from '@convex-dev/react-query';
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   component: Home,
   loader: ({ context }) => {
     return { user: context.user };
@@ -13,6 +16,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { user } = Route.useLoaderData();
   const router = useRouter();
+  const { data } = useSuspenseQuery(convexQuery(api.tasks.get, {}));
 
   return (
     <div className="flex flex-col gap-4 p-6">
