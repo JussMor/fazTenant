@@ -7,6 +7,7 @@ import { NotFound } from '~/lib/components/NotFound';
 import { routeTree } from './routeTree.gen';
 import { ConvexQueryClient } from '@convex-dev/react-query';
 import { ConvexProvider } from 'convex/react';
+import { SurrealProvider } from '../lib/surrealProvider';
 
 export function createRouter() {
   const CONVEX_URL = (import.meta as any).env.VITE_CONVEX_URL!;
@@ -35,7 +36,10 @@ export function createRouter() {
       scrollRestoration: true,
       Wrap: ({ children }) => (
         <ConvexProvider client={convexQueryClient.convexClient}>
+          <SurrealProvider endpoint="wss://united-viper-06au59aabpp7d03fme5r7n5an0.aws-use1.surreal.cloud"
+          	params={{ namespace: "mvp", database: "mvp-dev" }}>
           {children}
+          </SurrealProvider>
         </ConvexProvider>
       ),
     }),
