@@ -9,14 +9,14 @@ import { convexQuery } from '@convex-dev/react-query';
 export const Route = createFileRoute('/')({
   component: Home,
   loader: ({ context }) => {
-    return { user: context.user };
+    return { user: { name: 'John Doe' }};
   },
 });
 
 function Home() {
   const { user } = Route.useLoaderData();
   const router = useRouter();
-  const { data } = useSuspenseQuery(convexQuery(api.tasks.get, {}));
+
 
   return (
     <div className="flex flex-col gap-4 p-6">
@@ -31,9 +31,7 @@ function Home() {
       {user ? (
         <div className="flex flex-col gap-2">
           <p>Welcome back, {user.name}!</p>
-          <Button type="button" asChild className="w-fit" size="lg">
-            <Link to="/dashboard">Go to Dashboard</Link>
-          </Button>
+ 
           <div>
             More data:
             <pre>{JSON.stringify(user, null, 2)}</pre>

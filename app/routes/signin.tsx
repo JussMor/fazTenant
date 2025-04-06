@@ -9,11 +9,7 @@ const REDIRECT_URL = "/dashboard";
 export const Route = createFileRoute("/signin")({
   component: AuthPage,
   beforeLoad: async ({ context }) => {
-    if (context.user) {
-      throw redirect({
-        to: REDIRECT_URL,
-      });
-    }
+
   },
 });
 
