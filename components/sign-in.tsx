@@ -151,7 +151,7 @@ export default function SignIn() {
 							</svg>
 							Sign in with Github
 						</Button>
-						<Button
+						{/* <Button
 							variant="outline"
 							className={cn("w-full gap-2")}
 							onClick={async () => {
@@ -173,7 +173,7 @@ export default function SignIn() {
 								></path>
 							</svg>
 							Sign in with Microsoft
-						</Button>
+						</Button> */}
 					</div>
 				</div>
 			</CardContent>
