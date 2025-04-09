@@ -100,7 +100,7 @@ const FormLabel = ({
 
 	return (
 		<Label
-			ref={ref}
+			labelRef={ref}
 			className={cn(error && "text-destructive", className)}
 			htmlFor={formItemId}
 			{...props}
