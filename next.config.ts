@@ -1,5 +1,5 @@
-import { setupDevPlatform } from "@cloudflare/next-on-pages/next-dev";
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
 	transpilePackages: ["three"],
@@ -9,8 +9,6 @@ const nextConfig: NextConfig = {
 	},
 };
 
-if (process.env.NODE_ENV === "development") {
-	await setupDevPlatform();
-}
+initOpenNextCloudflareForDev();
 
 export default nextConfig;

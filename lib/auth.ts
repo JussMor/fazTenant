@@ -26,7 +26,7 @@ const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
 const to = process.env.TEST_EMAIL || "";
 
 const libsql = new LibsqlDialect({
-	url: process.env.TURSO_DATABASE_URL || "",
+	url: process.env.TURSO_URL || "",
 	authToken: process.env.TURSO_AUTH_TOKEN || "",
 });
 
