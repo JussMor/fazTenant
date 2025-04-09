@@ -1,6 +1,9 @@
 "use client";
 
+import { SubscriptionTierLabel } from "@/components/tier-labels";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -9,8 +12,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
+import CopyButton from "@/components/ui/copy-button";
 import {
 	Dialog,
 	DialogContent,
@@ -23,9 +26,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
 import { client, signOut, useSession } from "@/lib/auth-client";
-import { Session } from "@/lib/auth-types";
+import type { Session } from "@/lib/auth-types";
+import type { Subscription } from "@better-auth/stripe";
 import { MobileIcon } from "@radix-ui/react-icons";
+import { useQuery } from "@tanstack/react-query";
 import {
 	Edit,
 	Fingerprint,
@@ -43,23 +56,10 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import QRCode from "react-qr-code";
 import { toast } from "sonner";
 import { UAParser } from "ua-parser-js";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
-import QRCode from "react-qr-code";
-import CopyButton from "@/components/ui/copy-button";
-import { Badge } from "@/components/ui/badge";
-import { useQuery } from "@tanstack/react-query";
-import { SubscriptionTierLabel } from "@/components/tier-labels";
 import { Component } from "./change-plan";
-import { Subscription } from "@better-auth/stripe";
 
 export default function UserCard(props: {
 	session: Session | null;

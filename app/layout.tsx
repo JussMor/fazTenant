@@ -1,10 +1,10 @@
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+import { Toaster } from "@/components/ui/sonner";
 import { Wrapper, WrapperWithQuery } from "@/components/wrapper";
 import { createMetadata } from "@/lib/metadata";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 
 export const metadata = createMetadata({
 	title: {

@@ -1,16 +1,16 @@
-import { createAuthClient } from "better-auth/react";
+import { stripeClient } from "@better-auth/stripe/client";
 import {
+	adminClient,
+	genericOAuthClient,
+	multiSessionClient,
+	oidcClient,
+	oneTapClient,
 	organizationClient,
 	passkeyClient,
 	twoFactorClient,
-	adminClient,
-	multiSessionClient,
-	oneTapClient,
-	oidcClient,
-	genericOAuthClient,
 } from "better-auth/client/plugins";
+import { createAuthClient } from "better-auth/react";
 import { toast } from "sonner";
-import { stripeClient } from "@better-auth/stripe/client";
 
 export const client = createAuthClient({
 	plugins: [

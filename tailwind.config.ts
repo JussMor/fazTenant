@@ -87,7 +87,7 @@ const config = {
 	plugins: [
 		require("tailwindcss-animate"),
 		addVariablesForColors,
-		function ({ matchUtilities, theme }: any) {
+		({ matchUtilities, theme }: any) => {
 			matchUtilities(
 				{
 					"bg-grid": (value: any) => ({
@@ -116,8 +116,8 @@ const config = {
 } satisfies Config;
 
 function addVariablesForColors({ addBase, theme }: any) {
-	let allColors = flattenColorPalette(theme("colors"));
-	let newVars = Object.fromEntries(
+	const allColors = flattenColorPalette(theme("colors"));
+	const newVars = Object.fromEntries(
 		Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
 	);
 

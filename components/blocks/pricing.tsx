@@ -4,14 +4,14 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
+import { client } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { Star } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import confetti from "canvas-confetti";
 import NumberFlow from "@number-flow/react";
 import { CheckIcon } from "@radix-ui/react-icons";
-import { client } from "@/lib/auth-client";
+import confetti from "canvas-confetti";
+import { motion } from "framer-motion";
+import { Star } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 function useMediaQuery(query: string) {
 	const [matches, setMatches] = useState(false);

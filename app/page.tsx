@@ -26,6 +26,7 @@ export default async function Home() {
 							href="https://better-auth.com"
 							target="_blank"
 							className="italic underline"
+							rel="noreferrer"
 						>
 							better-auth.
 						</a>{" "}

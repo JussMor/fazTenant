@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Copy, Check } from "lucide-react";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Check, Copy } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface CopyButtonProps {
 	textToCopy: string;

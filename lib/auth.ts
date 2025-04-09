@@ -1,26 +1,26 @@
+import { stripe } from "@better-auth/stripe";
+import { LibsqlDialect } from "@libsql/kysely-libsql";
 import { betterAuth } from "better-auth";
+import { nextCookies } from "better-auth/next-js";
 import {
-	bearer,
 	admin,
+	bearer,
+	customSession,
 	multiSession,
+	oAuthProxy,
+	oidcProvider,
+	oneTap,
+	openAPI,
 	organization,
 	twoFactor,
-	oneTap,
-	oAuthProxy,
-	openAPI,
-	oidcProvider,
-	customSession,
 } from "better-auth/plugins";
-import { reactInvitationEmail } from "./email/invitation";
-import { LibsqlDialect } from "@libsql/kysely-libsql";
-import { reactResetPasswordEmail } from "./email/reset-password";
-import { resend } from "./email/resend";
+import { passkey } from "better-auth/plugins/passkey";
 import { MysqlDialect } from "kysely";
 import { createPool } from "mysql2/promise";
-import { nextCookies } from "better-auth/next-js";
-import { passkey } from "better-auth/plugins/passkey";
-import { stripe } from "@better-auth/stripe";
 import { Stripe } from "stripe";
+import { reactInvitationEmail } from "./email/invitation";
+import { resend } from "./email/resend";
+import { reactResetPasswordEmail } from "./email/reset-password";
 
 const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
 const to = process.env.TEST_EMAIL || "";
@@ -93,7 +93,7 @@ export const auth = betterAuth({
 		google: {
 			clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-		}
+		},
 	},
 	plugins: [
 		organization({

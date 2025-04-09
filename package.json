@@ -8,7 +8,7 @@
     "typecheck": "tsc --noEmit",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "npx @biomejs/biome check --write ",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && wrangler pages dev",
     "deploy": "npm run pages:build && wrangler pages deploy"
@@ -99,6 +99,7 @@
     "@babel/core": "^7.26.10",
     "@babel/preset-env": "^7.26.9",
     "@better-auth/cli": "^1.2.5",
+    "@biomejs/biome": "1.9.4",
     "@cloudflare/next-on-pages": "^1.13.12",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20.17.30",
