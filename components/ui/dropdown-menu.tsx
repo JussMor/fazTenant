@@ -6,7 +6,7 @@ import {
 	ChevronRightIcon,
 	DotFilledIcon,
 } from "@radix-ui/react-icons";
-import type * as React from "react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -50,7 +50,7 @@ const DropdownMenuSubContent = ({
 	className,
 	...props
 }: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent> & {
-	ref: React.RefObject<
+	ref?: React.RefObject<
 		React.ElementRef<typeof DropdownMenuPrimitive.SubContent>
 	>;
 }) => (
@@ -72,7 +72,7 @@ const DropdownMenuContent = ({
 	sideOffset = 4,
 	...props
 }: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content> & {
-	ref: React.RefObject<React.ElementRef<typeof DropdownMenuPrimitive.Content>>;
+	ref?: React.RefObject<React.ElementRef<typeof DropdownMenuPrimitive.Content>>;
 }) => (
 	<DropdownMenuPrimitive.Portal>
 		<DropdownMenuPrimitive.Content
@@ -89,18 +89,27 @@ const DropdownMenuContent = ({
 );
 DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;
 
-const DropdownMenuItem = ({ ref, className, inset, ...props }) => (
-	<DropdownMenuPrimitive.Item
+interface DropdownMenuItemProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> {
+	inset?: boolean;
+	ref?: React.Ref<HTMLDivElement>; // Optional ref
+  }
+  
+  const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuItemProps>(
+	({ className, inset = false, ...props }, ref) => (
+	  <DropdownMenuPrimitive.Item
 		ref={ref}
 		className={cn(
-			"relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-			inset && "pl-8",
-			className,
+		  "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+		  inset && "pl-8",
+		  className,
 		)}
 		{...props}
-	/>
-);
+	  />
+	)
+  );
+  
 DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
+  
 
 const DropdownMenuCheckboxItem = ({
 	ref,
@@ -109,7 +118,7 @@ const DropdownMenuCheckboxItem = ({
 	checked,
 	...props
 }: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem> & {
-	ref: React.RefObject<
+	ref?: React.RefObject<
 		React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>
 	>;
 }) => (
@@ -139,7 +148,7 @@ const DropdownMenuRadioItem = ({
 	children,
 	...props
 }: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem> & {
-	ref: React.RefObject<
+	ref?: React.RefObject<
 		React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>
 	>;
 }) => (
@@ -179,7 +188,7 @@ const DropdownMenuSeparator = ({
 	className,
 	...props
 }: React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator> & {
-	ref: React.RefObject<
+	ref?: React.RefObject<
 		React.ElementRef<typeof DropdownMenuPrimitive.Separator>
 	>;
 }) => (

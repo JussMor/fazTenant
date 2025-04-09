@@ -2,6 +2,7 @@ import { setupDevPlatform } from "@cloudflare/next-on-pages/next-dev";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+	transpilePackages: ["three"],
 	webpack: (config) => {
 		config.externals.push("@libsql/client");
 		return config;

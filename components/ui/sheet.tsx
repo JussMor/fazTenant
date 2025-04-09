@@ -63,10 +63,10 @@ const SheetContent = ({
 	children,
 	...props
 }: SheetContentProps & {
-	ref: React.RefObject<React.ElementRef<typeof SheetPrimitive.Content>>;
+	ref?: React.RefObject<React.ElementRef<typeof SheetPrimitive.Content>>;
 }) => (
 	<SheetPortal>
-		<SheetOverlay />
+		<SheetOverlay ref={null} className="" />
 		<SheetPrimitive.Content
 			ref={ref}
 			className={cn(sheetVariants({ side }), className)}
@@ -130,7 +130,7 @@ const SheetDescription = ({
 	className,
 	...props
 }: React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description> & {
-	ref: React.RefObject<React.ElementRef<typeof SheetPrimitive.Description>>;
+	ref?: React.RefObject<React.ElementRef<typeof SheetPrimitive.Description>>;
 }) => (
 	<SheetPrimitive.Description
 		ref={ref}

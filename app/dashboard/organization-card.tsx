@@ -82,6 +82,7 @@ export function OrganizationCard(props: {
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align="start">
 							<DropdownMenuItem
+								ref={undefined}
 								className=" py-1"
 								onClick={async () => {
 									organization.setActive({
@@ -108,7 +109,7 @@ export function OrganizationCard(props: {
 										const { data } = await organization.setActive({
 											organizationId: org.id,
 										});
-										setOptimisticOrg(data);
+										setOptimisticOrg(data as ActiveOrganization | null);
 									}}
 								>
 									<p className="text-sm sm">{org.name}</p>

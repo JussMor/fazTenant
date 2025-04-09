@@ -46,7 +46,7 @@ const DrawerContent = ({
 	ref: React.RefObject<React.ElementRef<typeof DrawerPrimitive.Content>>;
 }) => (
 	<DrawerPortal>
-		<DrawerOverlay />
+		<DrawerOverlay ref={null} className=""/>
 		<DrawerPrimitive.Content
 			ref={ref}
 			className={cn(

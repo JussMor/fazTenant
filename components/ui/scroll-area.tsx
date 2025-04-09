@@ -21,7 +21,7 @@ const ScrollArea = ({
 		<ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
 			{children}
 		</ScrollAreaPrimitive.Viewport>
-		<ScrollBar />
+		<ScrollBar ref={null} className=""  />
 		<ScrollAreaPrimitive.Corner />
 	</ScrollAreaPrimitive.Root>
 );

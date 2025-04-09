@@ -38,7 +38,7 @@ const AlertDialogContent = ({
 	ref: React.RefObject<React.ElementRef<typeof AlertDialogPrimitive.Content>>;
 }) => (
 	<AlertDialogPortal>
-		<AlertDialogOverlay />
+		<AlertDialogOverlay ref={ref} />
 		<AlertDialogPrimitive.Content
 			ref={ref}
 			className={cn(

@@ -121,7 +121,7 @@ const Carousel = ({
 				api: api,
 				opts,
 				orientation:
-					orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
+					orientation as CarouselProps["orientation"] || (opts?.axis === "y" ? "vertical" : "horizontal"),
 				scrollPrev,
 				scrollNext,
 				canScrollPrev,
@@ -206,7 +206,6 @@ const CarouselPrevious = ({
 
 	return (
 		<Button
-			ref={ref}
 			variant={variant}
 			size={size}
 			className={cn(
@@ -240,7 +239,6 @@ const CarouselNext = ({
 
 	return (
 		<Button
-			ref={ref}
 			variant={variant}
 			size={size}
 			className={cn(

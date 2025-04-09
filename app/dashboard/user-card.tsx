@@ -86,7 +86,7 @@ export default function UserCard(props: {
 					throw: true,
 				},
 			});
-			return res.length ? res[0] : null;
+			return res.data?.length ? res.data[0] : null;
 		},
 	});
 	return (
@@ -149,7 +149,7 @@ export default function UserCard(props: {
 				</div>
 
 				{session?.user.emailVerified ? null : (
-					<Alert>
+					<Alert variant="destructive">
 						<AlertTitle>Verify Your Email Address</AlertTitle>
 						<AlertDescription className="text-muted-foreground">
 							Please verify your email address. Check your inbox for the

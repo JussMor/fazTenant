@@ -49,7 +49,7 @@ export default function CopyButton({ textToCopy }: CopyButtonProps) {
 						<span className="sr-only">Copy to clipboard</span>
 					</Button>
 				</TooltipTrigger>
-				<TooltipContent>
+				<TooltipContent ref={null} className="">
 					<p>{isCopied ? "Copied!" : "Copy to clipboard"}</p>
 				</TooltipContent>
 			</Tooltip>

@@ -8,11 +8,11 @@ import { Input, type InputProps } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 const PasswordInput = ({
-	ref,
+	inputRef,
 	className,
 	...props
 }: InputProps & {
-	ref: React.RefObject<HTMLInputElement>;
+	inputRef?: React.RefObject<HTMLInputElement>;
 }) => {
 	const [showPassword, setShowPassword] = React.useState(false);
 	const disabled =
@@ -25,7 +25,7 @@ const PasswordInput = ({
 				type={showPassword ? "text" : "password"}
 				name="password_fake"
 				className={cn("hide-password-toggle pr-10", className)}
-				ref={ref}
+				inputRef={inputRef}
 			/>
 			<Button
 				type="button"

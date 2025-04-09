@@ -11,7 +11,7 @@ const Progress = ({
 	value,
 	...props
 }: React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root> & {
-	ref: React.RefObject<React.ElementRef<typeof ProgressPrimitive.Root>>;
+	ref?: React.RefObject<React.ElementRef<typeof ProgressPrimitive.Root>>;
 }) => (
 	<ProgressPrimitive.Root
 		ref={ref}

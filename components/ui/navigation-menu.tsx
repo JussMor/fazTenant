@@ -22,7 +22,7 @@ const NavigationMenu = ({
 		{...props}
 	>
 		{children}
-		<NavigationMenuViewport />
+		<NavigationMenuViewport ref={null} className="" />
 	</NavigationMenuPrimitive.Root>
 );
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName;
