@@ -2,7 +2,6 @@ import { stripe } from "@better-auth/stripe";
 import { LibsqlDialect } from "./db";
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
-import * as process from 'node:process';
 import {
 	admin,
 	bearer,
@@ -22,13 +21,23 @@ import { Stripe } from "stripe";
 import { reactInvitationEmail } from "./email/invitation";
 import { resend } from "./email/resend";
 import { reactResetPasswordEmail } from "./email/reset-password";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+
+
+
+const cloudflareContext = getCloudflareContext();
+
+const env = cloudflareContext.env as {
+	TURSO_URL: string;
+	TURSO_AUTH_TOKEN: string;
+} 
 
 const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
 const to = process.env.TEST_EMAIL || "";
 
 const libsql = new LibsqlDialect({
-	url: process.env.TURSO_URL || "",
-	authToken: process.env.TURSO_AUTH_TOKEN || ""
+	url: env.TURSO_URL || "",
+	authToken: env.TURSO_AUTH_TOKEN || ""
 });
 
 const mysql = process.env.USE_MYSQL
