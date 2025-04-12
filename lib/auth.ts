@@ -30,6 +30,8 @@ const cloudflareContext = getCloudflareContext();
 const env = cloudflareContext.env as {
 	TURSO_URL: string;
 	TURSO_AUTH_TOKEN: string;
+	GITHUB_CLIENT_ID: string;
+	GITHUB_CLIENT_SECRET: string;
 } 
 
 const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
@@ -97,8 +99,8 @@ export const auth = betterAuth({
 	},
 	socialProviders: {
 		github: {
-			clientId: process.env.GITHUB_CLIENT_ID || "",
-			clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+			clientId: env.GITHUB_CLIENT_ID || "",
+			clientSecret: env.GITHUB_CLIENT_SECRET || "",
 		},
 		google: {
 			clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
