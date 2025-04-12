@@ -19,7 +19,8 @@
     "incremental": true,
     "types": [
       "node",
-      "@react-three/fiber"
+      "@react-three/fiber",
+      "./worker-configuration.d.ts"
     ],
     "plugins": [
       {

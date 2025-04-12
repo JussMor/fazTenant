@@ -21,14 +21,20 @@ import { Stripe } from "stripe";
 import { reactInvitationEmail } from "./email/invitation";
 import { resend } from "./email/resend";
 import { reactResetPasswordEmail } from "./email/reset-password";
-
-
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
 const to = process.env.TEST_EMAIL || "";
 
+const fetchCloudflareContext = async () => {
+	return await getCloudflareContext({ async: true });
+};
+
+const cloudflareContext = await fetchCloudflareContext();
+
 const libsql = new LibsqlDialect({
-	url: process.env.TURSO_URL || "",
+	// @ts-ignore
+	url: cloudflareContext.env.TURSO_URL || "",
 	authToken: process.env.TURSO_AUTH_TOKEN || ""
 });
 
@@ -149,8 +155,7 @@ export const auth = betterAuth({
 			return {
 				...session,
 				user: {
-					...session.user,
-					dd: "test",
+					...session.user
 				},
 			};
 		}),
