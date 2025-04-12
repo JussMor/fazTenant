@@ -15,36 +15,28 @@ import {
 	twoFactor,
 } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
-import { MysqlDialect } from "kysely";
-import { createPool } from "mysql2/promise";
 import { Stripe } from "stripe";
 import { reactInvitationEmail } from "./email/invitation";
 import { resend } from "./email/resend";
 import { reactResetPasswordEmail } from "./email/reset-password";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
-const to = process.env.TEST_EMAIL || "";
-
 const fetchCloudflareContext = async () => {
-	return await getCloudflareContext({ async: true });
+	return await getCloudflareContext({ async: true }) ;
 };
 
-const cloudflareContext = await fetchCloudflareContext();
+const ctxClf = await fetchCloudflareContext();
+
+const from = ctxClf.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
+const to = ctxClf.env.TEST_EMAIL || "";
 
 const libsql = new LibsqlDialect({
-	// @ts-ignore
-	url: cloudflareContext.env.TURSO_URL || "",
-	authToken: process.env.TURSO_AUTH_TOKEN || ""
+	url: ctxClf.env.TURSO_URL || "",
+	authToken: ctxClf.env.TURSO_AUTH_TOKEN || ""
 });
 
-const mysql = process.env.USE_MYSQL
-	? new MysqlDialect(createPool(process.env.MYSQL_DATABASE_URL || ""))
-	: null;
 
-const dialect = process.env.USE_MYSQL ? mysql : libsql;
-
-if (!dialect) {
+if (!libsql) {
 	throw new Error("No dialect found");
 }
 
@@ -60,8 +52,8 @@ const STARTER_PRICE_ID = {
 export const auth = betterAuth({
 	appName: "Better Auth Demo",
 	database: {
-		dialect,
-		type: process.env.USE_MYSQL ? "mysql" : "sqlite",
+		dialect: libsql,
+		type: "sqlite",
 	},
 	emailVerification: {
 		async sendVerificationEmail({ user, url }) {
@@ -95,12 +87,12 @@ export const auth = betterAuth({
 	},
 	socialProviders: {
 		github: {
-			clientId: process.env.GITHUB_CLIENT_ID || "",
-			clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+			clientId: ctxClf.env.GITHUB_CLIENT_ID || "",
+			clientSecret: ctxClf.env.GITHUB_CLIENT_SECRET || "",
 		},
 		google: {
-			clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+			clientId: ctxClf.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
+			clientSecret: ctxClf.env.GOOGLE_CLIENT_SECRET || "",
 		},
 	},
 	plugins: [
@@ -119,7 +111,7 @@ export const auth = betterAuth({
 							process.env.NODE_ENV === "development"
 								? `http://localhost:3000/accept-invitation/${data.id}`
 								: `${
-										process.env.BETTER_AUTH_URL ||
+										ctxClf.env.BETTER_AUTH_URL ||
 										"https://demo.better-auth.com"
 									}/accept-invitation/${data.id}`,
 					}),
@@ -160,8 +152,8 @@ export const auth = betterAuth({
 			};
 		}),
 		stripe({
-			stripeClient: new Stripe(process.env.STRIPE_KEY || "sk_test_"),
-			stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
+			stripeClient: new Stripe(ctxClf.env.STRIPE_KEY || "sk_test_"),
+			stripeWebhookSecret: ctxClf.env.STRIPE_WEBHOOK_SECRET!,
 			subscription: {
 				enabled: true,
 				plans: [

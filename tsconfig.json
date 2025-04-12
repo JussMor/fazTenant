@@ -20,7 +20,7 @@
     "types": [
       "node",
       "@react-three/fiber",
-      "./worker-configuration.d.ts"
+      "@cloudflare/workers-types"
     ],
     "plugins": [
       {

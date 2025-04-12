@@ -4,8 +4,8 @@ compatibility_date = "2025-04-02"
 compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env" ]
 
 [assets]
-  directory = ".open-next/assets"
-  binding = "ASSETS"
+directory = ".open-next/assets"
+binding = "ASSETS"
 
 [observability.logs]
-  enabled = true
+enabled = true
