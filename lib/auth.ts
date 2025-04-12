@@ -26,8 +26,8 @@ const from = process.env.BETTER_AUTH_EMAIL || "delivered@resend.dev";
 const to = process.env.TEST_EMAIL || "";
 
 const libsql = new LibsqlDialect({
-	url: 'libsql://everfaz-jussmor.aws-us-east-1.turso.io',
-	authToken: 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NDQwMDA0ODYsImlkIjoiMWFhODQ3NTktMGMxMi00NzBiLTgyM2MtNmViM2FjY2VlMTNkIiwicmlkIjoiZjg1NWNkYmItYjBiYi00ZTUwLWE2MWMtNWVjNjExNWVlZjhkIn0.38yK1hKxf9d1_4C12j0EP-k4pDY5XXVgWPS8SlYUqtlTLluasZx-_UxQHm9Hys0rIdKWd2UzSrjC4gTf3WszDA',
+	url: process.env.TURSO_URL || "",
+	authToken: process.env.TURSO_AUTH_TOKEN || ""
 });
 
 const mysql = process.env.USE_MYSQL
