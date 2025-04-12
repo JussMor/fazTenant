@@ -2,6 +2,7 @@ import { stripe } from "@better-auth/stripe";
 import { LibsqlDialect } from "./db";
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
+import * as process from 'node:process';
 import {
 	admin,
 	bearer,
