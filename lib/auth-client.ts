@@ -29,7 +29,7 @@ export const client = createAuthClient({
 				maxAttempts: 1,
 			},
 		}),
-		// oidcClient(),
+		oidcClient(),
 		genericOAuthClient(),
 		stripeClient({
 			subscription: true,
