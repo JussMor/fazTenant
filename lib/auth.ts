@@ -152,7 +152,9 @@ export const auth = betterAuth({
 			};
 		}),
 		stripe({
-			stripeClient: new Stripe(ctxClf.env.STRIPE_KEY || "sk_test_"),
+			stripeClient: new Stripe(ctxClf.env.STRIPE_KEY || "sk_test_", {
+				httpClient: Stripe.createFetchHttpClient(),
+			}),
 			stripeWebhookSecret: ctxClf.env.STRIPE_WEBHOOK_SECRET!,
 			createCustomerOnSignUp: true,
 			subscription: {
