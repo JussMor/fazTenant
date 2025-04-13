@@ -34,11 +34,10 @@ export default function RegisterOAuthClient() {
 			setIsSubmitting(false);
 			return;
 		}
-		// const res = await client.oauth2.register({
-		// 	name,
-		// 	icon: await convertImageToBase64(logo),
-		// 	redirectURLs: [redirectUri],
-		// });
+		const res = await client.oauth2.register({
+			metadata: { name },
+			redirect_uris: [redirectUri],
+		});
 		setIsSubmitting(false);
 	};
 

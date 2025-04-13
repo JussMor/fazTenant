@@ -139,9 +139,9 @@ export const auth = betterAuth({
 		multiSession(),
 		oAuthProxy(),
 		nextCookies(),
-		oidcProvider({
-			loginPage: "/sign-in",
-		}),
+		// oidcProvider({
+		// 	loginPage: "/sign-in",
+		// }),
 		oneTap(),
 		customSession(async (session) => {
 			return {
