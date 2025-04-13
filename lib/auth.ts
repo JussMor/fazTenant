@@ -41,12 +41,12 @@ if (!libsql) {
 }
 
 const PROFESSION_PRICE_ID = {
-	default: "price_1QxWZ5LUjnrYIrml5Dnwnl0X",
-	annual: "price_1QxWZTLUjnrYIrmlyJYpwyhz",
+	default: "price_1RDDgNR6Bm4TBhLQd31uPr92",
+	annual: "price_1RDDnlR6Bm4TBhLQblgGzGWj",
 };
 const STARTER_PRICE_ID = {
-	default: "price_1QxWWtLUjnrYIrmleljPKszG",
-	annual: "price_1QxWYqLUjnrYIrmlonqPThVF",
+	default: "price_1RDDokR6Bm4TBhLQRoOeYDsQ",
+	annual: "price_1RDDnQR6Bm4TBhLQk9Xch3bt",
 };
 
 export const auth = betterAuth({
@@ -154,6 +154,7 @@ export const auth = betterAuth({
 		stripe({
 			stripeClient: new Stripe(ctxClf.env.STRIPE_KEY || "sk_test_"),
 			stripeWebhookSecret: ctxClf.env.STRIPE_WEBHOOK_SECRET!,
+			createCustomerOnSignUp: true,
 			subscription: {
 				enabled: true,
 				plans: [
