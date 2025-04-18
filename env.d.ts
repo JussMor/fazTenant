@@ -1,3 +1,4 @@
+import { ThreeElements } from '@react-three/fiber';
 interface CloudflareEnv {
     TURSO_URL: string;
     TURSO_AUTH_TOKEN: string;
@@ -14,4 +15,14 @@ interface CloudflareEnv {
     STRIPE_KEY: string;
     STRIPE_WEBHOOK_SECRET: string;
     BETTER_AUTH_EMAIL: string;
+}
+
+
+
+declare global {
+  namespace React {
+    namespace JSX {
+      interface IntrinsicElements extends ThreeElements {}
+    }
+  }
 }
